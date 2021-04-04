@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\userctl;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::post('acceslogin','userctl@login');
+Route::post('changepassword','userctl@changepassword');
+
+
+Route::get('viewchangepassword', function(){
+    return view('changepassword');
+});
+

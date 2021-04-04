@@ -25,7 +25,8 @@
     </head>
     <body class="antialiased">
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-            <form class="row g-3" action = "{{url('acceslogin')}}" method = "POST">
+            <h1 class="display-1">Change password</h1> 
+            <form class="row g-3" action = "{{url('changepassword')}}" method = "POST">
             {{csrf_field()}}
                 <div class="col-auto">
                     <label for="inputUsername" class="visually-hidden">Username</label>
@@ -33,23 +34,21 @@
                 
                     <label for="inputPassword" class="visually-hidden">Password</label>
                     <input type="password" name="inputPassword" class="form-control" id="contrasena" placeholder="Password">
+                    
+                    <label for="inputNewPassword" class="visually-hidden">new Password</label>
+                    <input type="password" name="inputNewPassword" class="form-control" id="contrasena" placeholder="New Password">
             
-                    <button type="submit" class="btn btn-primary mb-3">Confirm login</button>
+                    <button type="submit" class="btn btn-primary mb-3">Confirm change password</button>
                 </div>
             </form>  
             <div class="text-center">
                     <img src="images/ccong.png" class="rounded float-right" alt="...">
-            </div>  
+            </div> 
             @if ($error ?? '')
                 <div class="alert alert-danger" role="alert">
                     {{ $error }}
                 </div>
-            @endif
-            @if ($changepassword ?? '')
-                <div class="alert alert-success" role="alert">
-                    {{ $changepassword }}
-                </div>
-            @endif           
+            @endif               
         </div>
     </body>
 </html>

@@ -24,32 +24,18 @@
         </style>
     </head>
     <body class="antialiased">
+        <nav class="navbar navbar-light bg-dark">
+            <form class="form-inline">
+                <button class="btn btn-outline-success" type="button"></button>
+                <a href="{{url('viewchangepassword')}}"><button class="btn btn-sm btn-outline-secondary" type="button">Change password</button></a>
+            </form>
+        </nav>
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-            <form class="row g-3" action = "{{url('acceslogin')}}" method = "POST">
-            {{csrf_field()}}
-                <div class="col-auto">
-                    <label for="inputUsername" class="visually-hidden">Username</label>
-                    <input type="text" name="inputUsername" class="form-control" id="inputUsername" placeholder="Username">
-                
-                    <label for="inputPassword" class="visually-hidden">Password</label>
-                    <input type="password" name="inputPassword" class="form-control" id="contrasena" placeholder="Password">
-            
-                    <button type="submit" class="btn btn-primary mb-3">Confirm login</button>
-                </div>
-            </form>  
-            <div class="text-center">
-                    <img src="images/ccong.png" class="rounded float-right" alt="...">
-            </div>  
-            @if ($error ?? '')
-                <div class="alert alert-danger" role="alert">
-                    {{ $error }}
-                </div>
-            @endif
-            @if ($changepassword ?? '')
-                <div class="alert alert-success" role="alert">
-                    {{ $changepassword }}
-                </div>
-            @endif           
+            HOLAAA   admin {{$username}} 
+            <button type="button" class="btn btn-primary">
+                GESTIONAR USUARIS         
+            </button>
+            <button type="button" class="btn btn-info">GESTIONAR ONG'S</button>  
         </div>
     </body>
 </html>
