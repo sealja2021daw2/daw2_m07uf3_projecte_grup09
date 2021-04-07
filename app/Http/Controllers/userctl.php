@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 Use DB;
+use Validator;
 
 class userctl extends Controller
 {
@@ -17,7 +18,8 @@ class userctl extends Controller
      */
     public function index()
     {
-        //
+        $user = User::all();
+        return view('usercrudview.index', compact('user'));
     }
 
     /**
@@ -27,7 +29,7 @@ class userctl extends Controller
      */
     public function create()
     {
-        //
+        return view('usercrudview.crea');
     }
 
     /**
@@ -38,7 +40,24 @@ class userctl extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->input('esadmin')=="true")
+            $request['esadmin']=true;
+        else $request['esadmin']=false;
+
+        $nouUser = $request->validate([
+            'nomusuari' => 'unique:users|required|max:25',
+            'esadmin' => 'required|boolean',
+            'contrasena' => 'required|min:8',
+            'nom' => 'required|max:25',
+            'cognoms' => 'required|max:25',
+            'email' => 'unique:users|required|max:25',
+            'mobil' => 'required|max:9',
+            
+            ]);
+
+            $nouUser['contrasena']=Hash::make($request['contrasena']);
+            $user = User::create($nouUser);
+            return redirect('/users')->with('completed', 'User creat!');
     }
 
     /**
@@ -60,7 +79,8 @@ class userctl extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('usercrudview.actualitza', compact('user'));
     }
 
     /**
@@ -72,7 +92,31 @@ class userctl extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if($request->input('esadmin')=="true")
+            $request['esadmin']=true;
+        else $request['esadmin']=false;
+        
+        $usertemp = DB::table('users')->where('nomusuari', '=', $id)->first();
+        
+        $uniqueusername='unique:users|required|max:25';
+        $uniqueemail='unique:users|required|max:25';
+        if($request->input('nomusuari')==$id) $uniqueusername='required|max:25';
+        if($request->input('email')==$usertemp->email) $uniqueemail='required|max:25';
+
+        $dades = $request->validate([
+            'nomusuari' => $uniqueusername,
+            'esadmin' => 'required|boolean',
+            'contrasena' => 'required|min:8',
+            'nom' => 'required|max:25',
+            'cognoms' => 'required|max:25',
+            'email' => $uniqueemail,
+            'mobil' => 'required|max:9'
+            
+            ]);
+            if( strpos($request->input('contrasena'),'2y$10$')==false) $dades['contrasena']=Hash::make($request['contrasena']);
+            
+        User::wherenomusuari($id)->update($dades);
+        return redirect('/users')->with('completed', 'User actualitzat');    
     }
 
     /**
@@ -83,7 +127,9 @@ class userctl extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect('/users')->with('completed', 'User esborrat');
     }
 
     /**

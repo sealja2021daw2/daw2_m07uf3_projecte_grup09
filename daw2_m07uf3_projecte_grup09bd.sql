@@ -27,7 +27,7 @@ create table if not exists socis(
     comarca varchar(25) not null,
     telefon numeric(9,0),
     mobil numeric(9,0) not null,
-    email varchar(25) not null,
+    email varchar(25) not null UNIQUE,
     d_alta date not null,
     q_mensual double(9,2) not null,
     aport_anual double(9,2)
@@ -82,7 +82,7 @@ create table if not exists users(
     contrasena varchar(200) not null,
     nom varchar(25) not null,
     cognoms varchar(50) not null,
-    email varchar(25) not null,
+    email varchar(25) not null UNIQUE,
 	mobil integer not null,
     h_entrada datetime,
 	h_sortida datetime

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\userctl;
+
 
 
 /*
@@ -18,7 +18,7 @@ use App\Http\Controllers\userctl;
 Route::get('/', function () {
     return view('welcome');
 });
-
+//users
 Route::post('acceslogin','userctl@login');
 Route::post('changepassword','userctl@changepassword');
 
@@ -27,3 +27,20 @@ Route::get('viewchangepassword', function(){
     return view('changepassword');
 });
 
+
+Route::get('menugestiouser', function(){
+    return view('usercrudview.menugestiouser');
+});
+
+Route::get('menuadmin', function(){
+    return view('menuadm');
+});
+Route::resource('users', userctl::class);
+
+//ong's 
+
+Route::get('menugestioong', function(){
+    return view('ongcrudview.menugestioong');
+});
+
+Route::resource('ongs', ongctl::class);
