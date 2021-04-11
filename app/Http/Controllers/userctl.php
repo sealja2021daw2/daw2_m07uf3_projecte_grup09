@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Hash;
@@ -145,8 +145,9 @@ class userctl extends Controller
         if($user){
             if(Hash::check($data['inputPassword'],$user->contrasena)){ 
                 $this->ultimoacesso($user->nomusuari);
+                
                 if($user->esadmin) return view('menuadm',['username' => $user->nomusuari]);
-                else return view('menu',['username' => $user->nomusuari]);
+                else return view('menu',['username' => $user->nomusuari],$request->session()->all());
 
             }else return view('welcome',['error'=>"La contrasenya no coincideix"]);
         }else return view('welcome',['error'=>"El usuari no existeix"]);

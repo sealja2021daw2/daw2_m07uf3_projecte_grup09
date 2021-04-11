@@ -29,6 +29,7 @@
             <form class="form-inline">
             <a href="{{url('menuadmin')}}"><button class="btn btn-outline-success" type="button">HOME</button></a>
                 <a href="{{url('viewchangepassword')}}"><button class="btn btn-sm btn-outline-secondary" type="button">Change password</button></a>
+                <a href="{{url('/')}}" class="float-right"><button class="btn btn-outline-success " type="button">Log out</button></a>
             </form>
         </nav>
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
