@@ -1,7 +1,17 @@
-@extends('menuadm')
+@if ($sessesadmin=='0')
+    @php
+        $i = 'menu'
+    @endphp
+@else
+    @php
+        $i = 'menuadm'
+    @endphp
+   
+@endif
+
+@extends($i)
 
 @section('content')
-
              <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
                 <div class="underline flex justify-center pt-8 sm:justify-start sm:pt-0">
                     <h2>Control treballadors amb BD MySQL i framework Laravel 8</h2>

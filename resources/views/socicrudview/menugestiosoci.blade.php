@@ -1,4 +1,16 @@
-@extends('menuadm')
+@if ($sessesadmin=='0')
+    @php
+        $i = 'menu'
+    @endphp
+@else
+    @php
+        $i = 'menuadm'
+    @endphp
+   
+@endif
+
+@extends($i)
+
 
 @section('content')
 
@@ -36,7 +48,7 @@
                         </div>
                     </div>
                 </div>
-              
+               
                 
             </div>
         </div>

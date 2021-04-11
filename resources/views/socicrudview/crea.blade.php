@@ -1,4 +1,4 @@
-@extends('menuadm')
+@extends('menu')
 
 @section('content')
 

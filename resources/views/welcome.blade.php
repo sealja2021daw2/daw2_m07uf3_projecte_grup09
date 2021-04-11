@@ -49,7 +49,12 @@
                 <div class="alert alert-success" role="alert">
                     {{ $changepassword }}
                 </div>
-            @endif           
+            @endif   
+            @if ($logout ?? '')
+                <div class="alert alert-success" role="alert">
+                    {{ $logout }}
+                </div>
+            @endif        
         </div>
     </body>
 </html>

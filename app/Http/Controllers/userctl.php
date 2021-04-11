@@ -138,18 +138,23 @@ class userctl extends Controller
      */
 
     public function login(Request $request ){
+  
         $data = $request->input();
 
         $user = DB::table('users')->where('nomusuari', '=', $data['inputUsername'])->first();
-
+      
         if($user){
             if(Hash::check($data['inputPassword'],$user->contrasena)){ 
                 $this->ultimoacesso($user->nomusuari);
-                
+                $request->session()->put('user', $user->nomusuari);
+                $request->session()->put('esadmin', $user->esadmin);
+                $sessuser = $request->session()->get('user');
+                $sessesadmin = $request->session()->get('esadmin');
                 if($user->esadmin) return view('menuadm',['username' => $user->nomusuari]);
-                else return view('menu',['username' => $user->nomusuari],$request->session()->all());
+                else return view('menu',['username' => $user->nomusuari,
+                                          'sessuser'=>$sessuser, 'sessesadmin'=>$sessesadmin]);
 
-            }else return view('welcome',['error'=>"La contrasenya no coincideix"]);
+            }else return view('welcome',['error'=>"La contrasenya no coincideix",]);
         }else return view('welcome',['error'=>"El usuari no existeix"]);
     }
 
