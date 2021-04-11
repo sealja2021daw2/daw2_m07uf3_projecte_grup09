@@ -44,6 +44,6 @@
     </tbody>
   </table>
 <div>
-<br><a href="{{ url('ongs/create') }}">Accés directe a la vista de creació d'empleats</a>
+<br><a href="{{ url('ongs/create') }}">Accés directe a la vista de creació d'ong's</a>
 <br><a href="{{ url('menugestioong') }}">Tornar a la gestio</a>
 @endsection

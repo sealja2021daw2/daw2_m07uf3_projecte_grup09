@@ -27,10 +27,11 @@ create table if not exists socis(
     comarca varchar(25) not null,
     telefon numeric(9,0),
     mobil numeric(9,0) not null,
-    email varchar(25) not null UNIQUE,
+    email varchar(100) not null UNIQUE,
     d_alta date not null,
-    q_mensual double(9,2) not null,
-    aport_anual double(9,2)
+    q_mensual decimal(9,2) not null,
+    aport_anual decimal(9,2),
+    donacio decimal(9,2) DEFAULT 0
 );
 
 create table if not exists formades(
@@ -61,8 +62,8 @@ create table if not exists treballadors(
 create table if not exists professionals(
 	nif varchar(9),
     carrec varchar(20) not null,
-    quant_paga_SeguretatSocial double(9,2) not null,
-    irpf_descompte DOUBLE(9,2) not null,
+    quant_paga_SeguretatSocial decimal(9,2) not null,
+    irpf_descompte decimal(9,2) not null,
     primary key(nif),
     foreign key (nif) references treballadors(nif) on delete cascade
 );
@@ -82,7 +83,7 @@ create table if not exists users(
     contrasena varchar(200) not null,
     nom varchar(25) not null,
     cognoms varchar(50) not null,
-    email varchar(25) not null UNIQUE,
+    email varchar(100) not null UNIQUE,
 	mobil integer not null,
     h_entrada datetime,
 	h_sortida datetime

@@ -5,27 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Soci extends Model
+class Formade extends Model
 {
     use HasFactory;
     public $timestamps = false;
     public $incrementing = false;
-    protected $primaryKey = 'nif';
-
+    protected $primaryKey = ['cif_ong', 'nif_soci'];
 
     protected $fillable = [
-        'nif',
-        'nom',
-        'cognoms',
-        'adreca',
-        'poblacio',
-        'comarca',
-        'telefon',
-        'mobil',
-        'email',
-        'd_alta',
-        'q_mensual',
-        'aport_anual'
+        'cif_ong',
+        'nif_soci'
     ];
 
     /**

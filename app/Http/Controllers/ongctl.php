@@ -106,7 +106,7 @@ class ongctl extends Controller
             'poblacio' => 'required|max:25',
             'comarca' => 'required|max:25',
             'tipus_ong' => 'required|max:25',
-            'utilpublicgencat' => 'required|boolean',
+            'utilpublicgencat' => 'required|boolean'
             
             ]);
 

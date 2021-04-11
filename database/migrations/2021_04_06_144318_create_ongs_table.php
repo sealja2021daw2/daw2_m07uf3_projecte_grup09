@@ -18,7 +18,7 @@ class CreateOngsTable extends Migration
             $table->string('nom',25)->required();
             $table->string('adreca',50)->required();
             $table->string('poblacio',25)->required();
-            $table->string('comarca',25)->unique()->required();
+            $table->string('comarca',25)->required();
             $table->string('tipus_ong',25)->required();
             $table->boolean('utilpublicgencat')->required();
             $table->primary('cif');

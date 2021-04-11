@@ -44,3 +44,20 @@ Route::get('menugestioong', function(){
 });
 
 Route::resource('ongs', ongctl::class);
+
+//soci's
+Route::get('menugestiosoci', function(){
+    return view('socicrudview.menugestiosoci');
+});
+
+Route::resource('socis', socictl::class);
+
+//formades
+Route::get('menugestioformade', function(){
+    return view('formadecrudview.menugestioformade');
+});
+Route::get('formadeedit/{id}/{id2}', 'formadectl@edit');
+Route::post('formadeup/{id}/{id2}', 'formadectl@update');
+Route::post('formadedel/{id}/{id2}', 'formadectl@destroy');
+
+Route::resource('formades', formadectl::class)->except(['destroy','update','edit']);

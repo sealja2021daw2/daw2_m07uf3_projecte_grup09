@@ -36,8 +36,8 @@
             <br />
             <a href="{{url('menugestiouser')}}"><button type="button" class="btn btn-primary">GESTIONAR USUARIS</button></a>
             <a href="{{url('menugestioong')}}"><button type="button" class="btn btn-info">GESTIONAR ONG'S</button></a>
-            
-
+            <a href="{{url('menugestiosoci')}}"><button type="button" class="btn btn-danger">GESTIONAR SOCIS</button></a>
+            <a href="{{url('menugestioformade')}}"><button type="button" class="btn btn-success">GESTIONAR SOCIS AMB ONG'S</button></a>
             <div  class="container">
                 @yield('content')
             </div>
