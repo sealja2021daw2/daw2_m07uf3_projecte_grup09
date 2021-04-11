@@ -27,17 +27,19 @@
     <body class="antialiased">
         <nav class="navbar navbar-light bg-dark">
             <form class="form-inline">
-                <button class="btn btn-outline-success" type="button"></button>
+            <a href="{{url('menuadmin')}}"><button class="btn btn-outline-success" type="button">HOME</button></a>
                 <a href="{{url('viewchangepassword')}}"><button class="btn btn-sm btn-outline-secondary" type="button">Change password</button></a>
             </form>
         </nav>
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-            HOLAAA   admin {{$username ?? ''}} 
             <br />
             <a href="{{url('menugestiouser')}}"><button type="button" class="btn btn-primary">GESTIONAR USUARIS</button></a>
             <a href="{{url('menugestioong')}}"><button type="button" class="btn btn-info">GESTIONAR ONG'S</button></a>
             <a href="{{url('menugestiosoci')}}"><button type="button" class="btn btn-danger">GESTIONAR SOCIS</button></a>
             <a href="{{url('menugestioformade')}}"><button type="button" class="btn btn-success">GESTIONAR SOCIS AMB ONG'S</button></a>
+            <a href="{{url('menugestiotreballador')}}"><button type="button" class="btn btn-warning">GESTIONAR TREBALLADORS</button></a>
+            <a href="{{url('menugestioprofessional')}}"><button type="button" class="btn btn-dark">GESTIONAR  TREBALLADORS PROFESSIONALS</button></a>
+            <a href="{{url('menugestiovoluntari')}}"><button type="button" class="btn btn-secondary">GESTIONAR  TREBALLADORS VOLUNTARIS</button></a>
             <div  class="container">
                 @yield('content')
             </div>

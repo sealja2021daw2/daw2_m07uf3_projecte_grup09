@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-
-use App\Models\Soci;
+use App\Models\Treballador;
 Use DB;
 use Validator;
+use App\Models\Ong;
 
-class socictl extends Controller
+class treballadorctl extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +18,8 @@ class socictl extends Controller
      */
     public function index()
     {
-        $soci = Soci::all();
-        return view('socicrudview.index', compact('soci'));
+        $treballador = Treballador::all();
+        return view('treballadorcrudview.index', compact('treballador'));
     }
 
     /**
@@ -29,7 +29,8 @@ class socictl extends Controller
      */
     public function create()
     {
-        return view('socicrudview.crea');
+        $ong = Ong::all();
+        return view('treballadorcrudview.crea',compact('ong'));
     }
 
     /**
@@ -40,9 +41,8 @@ class socictl extends Controller
      */
     public function store(Request $request)
     {
-        
-        $nouSoci = $request->validate([
-            'nif' => 'unique:socis|required|max:9',
+        $nouTreballador = $request->validate([
+            'nif' => 'unique:treballadors|required|max:9',
             'nom' => 'required|max:25',
             'cognoms' => 'required|max:50',
             'adreca' => 'required|max:50',
@@ -50,15 +50,15 @@ class socictl extends Controller
             'comarca' => 'required|max:25',
             'telefon' => 'required|max:9',
             'mobil' => 'required|max:9',
-            'email' => 'unique:socis|required|max:100',
-            'd_alta' => 'required|date_format:Y-m-d',
-            'q_mensual' => 'required|regex:/^\d+(\.\d{1,2})?$/'
+            'email' => 'unique:treballadors|required|max:100',
+            'd_ingres' => 'required|date_format:Y-m-d',
+            'cif_ong'=> 'required|max:9|exists:ongs,cif',
             ]);
 
 
-            $soci = Soci::create($nouSoci);
-            DB::update('update socis set aport_anual =?*12 where nif = ?',[$request->input('q_mensual'),$request->input('nif')]);
-            return redirect('/socis')->with('completed', 'Soci creat!');
+            $treballador = Treballador::create($nouTreballador);
+
+            return redirect('/treballadors')->with('completed', 'Treballador creat!');
     }
 
     /**
@@ -80,8 +80,9 @@ class socictl extends Controller
      */
     public function edit($id)
     {
-        $soci = Soci::findOrFail($id);
-        return view('socicrudview.actualitza', compact('soci'));
+        $treballador = Treballador::findOrFail($id);
+        $ong = Ong::all();
+        return view('treballadorcrudview.actualitza', compact('treballador'), compact('ong'));
     }
 
     /**
@@ -93,14 +94,13 @@ class socictl extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        $socitemp = DB::table('socis')->where('nif', '=', $id)->first();
+        $treballadortemp = DB::table('treballadors')->where('nif', '=', $id)->first();
         
-        $uniquenif='unique:socis|required|max:9';
-        $uniqueemail='unique:users|required|max:100';
+        $uniquenif='unique:treballadors|required|max:9';
+        $uniqueemail='unique:treballadors|required|max:100';
         if($request->input('nif')==$id) $uniquenif='required|max:9';
-        if($request->input('email')==$socitemp->email) $uniqueemail='required|max:100';
-
+        if($request->input('email')==$treballadortemp->email) $uniqueemail='required|max:100';
+        
         $dades = $request->validate([
             'nif' => $uniquenif,
             'nom' => 'required|max:25',
@@ -111,14 +111,12 @@ class socictl extends Controller
             'telefon' => 'required|max:9',
             'mobil' => 'required|max:9',
             'email' => $uniqueemail,
-            'd_alta' => 'required|date_format:Y-m-d',
-            'q_mensual' => 'required|regex:/^\d+(\.\d{1,2})?$/',
-            'donacio' => 'regex:/^\d+(\.\d{1,2})?$/'
+            'd_ingres' => 'required|date_format:Y-m-d',
+            'cif_ong'=> 'required|max:9|exists:ongs,cif',
             ]);
-            Soci::wherenif($id)->update(collect($dades)->except('donacio')->toArray());
-            DB::update('update socis set aport_anual =?*12+? , donacio=?+? where nif = ?',[$request->input('q_mensual'),$request->input('donacio'),$socitemp->donacio,$request->input('donacio'),$request->input('nif')]);
-            return redirect('/socis')->with('completed', 'Soci actualitzat'); 
-
+            
+        Treballador::wherenif($id)->update($dades);
+        return redirect('/treballadors')->with('completed', 'Treballador actualitzat'); 
 
     }
 
@@ -130,10 +128,8 @@ class socictl extends Controller
      */
     public function destroy($id)
     {
-        $soci = Soci::findOrFail($id);
-        $soci->delete();
-        return redirect('/socis')->with('completed', 'Soci esborrat');
+        $treballador = Treballador::findOrFail($id);
+        $treballador->delete();
+        return redirect('/treballadors')->with('completed', 'Treballador esborrat');
     }
-
-   
 }

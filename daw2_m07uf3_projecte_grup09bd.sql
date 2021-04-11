@@ -61,7 +61,7 @@ create table if not exists treballadors(
 
 create table if not exists professionals(
 	nif varchar(9),
-    carrec varchar(20) not null,
+    carrec varchar(25) not null,
     quant_paga_SeguretatSocial decimal(9,2) not null,
     irpf_descompte decimal(9,2) not null,
     primary key(nif),

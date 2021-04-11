@@ -36,7 +36,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="{{ url('menuadmin') }}">Tornar al menú</a>
+              
                 
             </div>
         </div>

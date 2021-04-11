@@ -61,3 +61,24 @@ Route::post('formadeup/{id}/{id2}', 'formadectl@update');
 Route::post('formadedel/{id}/{id2}', 'formadectl@destroy');
 
 Route::resource('formades', formadectl::class)->except(['destroy','update','edit']);
+
+//treballadors
+Route::get('menugestiotreballador', function(){
+    return view('treballadorcrudview.menugestiotreballador');
+});
+
+Route::resource('treballadors', treballadorctl::class);
+
+//professionals
+Route::get('menugestioprofessional', function(){
+    return view('professionalcrudview.menugestioprofessional');
+});
+
+Route::resource('professionals', professionalctl::class);
+
+//voluntaris
+Route::get('menugestiovoluntari', function(){
+    return view('voluntaricrudview.menugestiovoluntari');
+});
+
+Route::resource('voluntaris', voluntarictl::class);

@@ -5,16 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Formade extends Model
+class Voluntari extends Model
 {
     use HasFactory;
     public $timestamps = false;
     public $incrementing = false;
-    protected $primaryKey = ['cif_ong', 'nif_soci'];
+    protected $primaryKey = 'nif';
 
     protected $fillable = [
-        'cif_ong',
-        'nif_soci'
+        'nif',
+        'edat',
+        'professio',
+        'h_dedicades'
     ];
 
     /**

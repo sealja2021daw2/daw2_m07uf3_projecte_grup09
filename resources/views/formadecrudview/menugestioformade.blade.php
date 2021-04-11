@@ -36,7 +36,6 @@
                         </div>
                     </div>
                 </div>
-                <a href="{{ url('menuadmin') }}">Tornar al menú</a>
                 @if ($errores ?? '')
                 <div class="alert alert-danger" role="alert">
                     {{ $errores }}

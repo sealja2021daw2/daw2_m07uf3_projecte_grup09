@@ -99,9 +99,9 @@ class userctl extends Controller
         $usertemp = DB::table('users')->where('nomusuari', '=', $id)->first();
         
         $uniqueusername='unique:users|required|max:25';
-        $uniqueemail='unique:users|required|max:25';
+        $uniqueemail='unique:users|required|max:100';
         if($request->input('nomusuari')==$id) $uniqueusername='required|max:25';
-        if($request->input('email')==$usertemp->email) $uniqueemail='required|max:25';
+        if($request->input('email')==$usertemp->email) $uniqueemail='required|max:100';
 
         $dades = $request->validate([
             'nomusuari' => $uniqueusername,
