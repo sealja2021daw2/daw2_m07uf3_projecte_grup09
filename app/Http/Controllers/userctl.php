@@ -187,6 +187,8 @@ class userctl extends Controller
                     $newpassword=Hash::make($data['inputNewPassword']);
                     $this->ultimasalida($user->nomusuari);
                     DB::update('update users set contrasena = ? where nomusuari = ?',[$newpassword,$user->nomusuari]);
+                    session()->forget('user');
+                    session()->forget('esadmin');
                     return view('welcome',['changepassword'=> "Contrasenya cambiada!!!"]);
                 }else return view('changepassword',['error'=>"La contrasenya no coincideix"]);
             }else return view('changepassword',['error'=>"Aque usuari existeix??"]);
